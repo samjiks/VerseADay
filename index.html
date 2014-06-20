@@ -1,0 +1,21 @@
+<!Doctype html>
+<html ng-app>
+<head>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<script>
+function MyCntrl($scope) {
+  $scope.books = [
+		{name: 'Effective Java', 'author':'Joshua Bloch'},
+  ];
+  $scope.myBooks = $scope.books; // red
+}
+</script>
+</head>
+<body>
+<div ng-controller="MyCntrl">
+	<select ng-model="myBooks" ng-options=="book.name for book in books">
+	</select>
+    <script type="text/javascript"  src="js/angular.min.js"></script>
+<div>
+</body>
+</html>
