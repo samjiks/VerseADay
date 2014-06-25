@@ -9,13 +9,32 @@ Angular JS
 <body ng-app="MyApp">
   <div ng-controller="PostsCtrl">
     <div ng-repeat="post in posts">
-	      <div ng-repeat="book in post">
-          <select  ng-model="book.name" ng-change="changes(book.name)" ng-options="chapter.name for chapter in book | filter:search">
-                  <option value="">Choose a book</option>
-              </select>
-                Search : <input type-"text" ng-model="search">
+	        Search : <input type-"text" ng-model="search">
 
-              <select ng-model="chapterno" ng-options="value.name for value in book"><option value="">Select a Chapter</option></select> 
+        <div ng-repeat="book in post">
+          <select  ng-model="book.name" ng-change="changes(book.name)" ng-options="chapter.name for chapter in book | filter:search">
+                  <option value="" ng-selected="selected">Choose a book</option>
+              </select>
+             
+
+<!--               <select ng-model="selected"><option value="select in selected">{{select.name}}</option></select> 
+              -->
+
+              <select ng-model="selectedchapter" ng-options="item.name for item in selectedchapter">
+              <option value="" ng-selected="selected">Choose a Chapter</option>
+            </select>
+
+             <select ng-model="selectedverse" ng-options="item.name for item in selectedchapter">
+              <option value="" ng-selected="selected">Choose a Chapter</option>
+            </select>
+
+            <textarea ng-model="selectedtext"></textarea>
+
+            <!-- <ul ng-model="selected">
+            <li  ng-repeat="item in selected">{{item}}</li>
+            </ul> -->
+
+             {{selectedchapter}}
 
     </div> 
 	     </div>
@@ -38,9 +57,17 @@ Angular JS
          	console.log("Error: " + data);
         });
 
-/*        $scope.changes = function(book) {
-            $scope.chapterno = book.name
-        }*/
+
+        $scope.selectedchapter = {};
+       $scope.changes = function(book) {
+
+           var log = [];
+               angular.forEach(book.chapter, function(key, value) {
+                  this.push(key);
+                  // console.log($scope.selected.name);
+               }, log);
+            $scope.selectedchapter = log;
+        }
     });
 
     app.controller("chapterCtrl", function($scope, $http) {
